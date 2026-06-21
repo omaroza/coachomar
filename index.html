@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مبادر كوتشينج — كل إنسان بداخله مشروع ينتظر قراراً</title>
+  <meta name="description" content="ورش تدريبية، كتب، جلسات كوتشينج فردية، وكورسات مع الكوتش عمر المرزوقي لبناء مشروعك من الصفر" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0D1F3C;
+      --navy-light: #162B52;
+      --navy-mid: #1E3A6E;
+      --gold: #C9A84C;
+      --gold-light: #E8C96A;
+      --gold-pale: #F5E9C8;
+      --white: #FFFFFF;
+      --gray-50: #F8F9FA;
+      --gray-100: #F0F1F3;
+      --gray-300: #C8CDD6;
+      --gray-500: #6B7280;
+      --gray-700: #374151;
+      --text-main: #0D1F3C;
+      --text-light: #6B7280;
+      --font: 'Cairo', 'Arial', sans-serif;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(13,31,60,0.10);
+      --shadow-lg: 0 8px 40px rgba(13,31,60,0.16);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--text-main);
+      background: var(--white);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; right: 0; left: 0; z-index: 999;
+      background: rgba(13,31,60,0.97);
+      backdrop-filter: blur(10px);
+      padding: 0 5%;
+      height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-img-wrap { background: var(--white); border-radius: 10px; padding: 6px 14px; display: flex; align-items: center; }
+    .nav-logo-img { height: 50px; width: auto; display: block; }
+    .nav-logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; color: var(--navy);
+    }
+    .nav-logo-text { color: var(--white); font-size: 17px; font-weight: 700; }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links { display: flex; gap: 26px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy); padding: 9px 22px; border-radius: 8px;
+      text-decoration: none; font-weight: 700; font-size: 14px;
+      transition: opacity 0.2s; border: none; cursor: pointer; font-family: var(--font);
+    }
+    .nav-cta:hover { opacity: 0.9; }
+
+    /* HERO (dynamic — built from whichever product is marked isHero) */
+    .hero {
+      min-height: 92vh;
+      background: var(--navy);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+      padding: 100px 5% 60px;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(201,168,76,0.07) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(30,58,110,0.6) 0%, transparent 50%);
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 100px; padding: 6px 16px;
+      color: var(--gold); font-size: 13px; font-weight: 600;
+      margin-bottom: 22px;
+    }
+    .hero-title {
+      font-size: clamp(26px, 4vw, 44px);
+      font-weight: 800; color: var(--white);
+      line-height: 1.35; margin-bottom: 10px;
+    }
+    .hero-title .highlight { color: var(--gold); }
+    .hero-badge-line {
+      display: inline-block; background: var(--gold); color: var(--navy);
+      padding: 6px 18px; border-radius: 8px; font-weight: 800; font-size: 16px;
+      margin: 14px 0 22px;
+    }
+    .hero-desc {
+      color: rgba(255,255,255,0.75);
+      font-size: clamp(14px, 1.7vw, 16px);
+      line-height: 1.9; margin-bottom: 30px; font-weight: 400; max-width: 540px;
+    }
+    .hero-meta-row {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 14px; border-radius: 10px;
+      color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 600;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy); padding: 15px 34px; border-radius: 10px;
+      font-weight: 700; font-size: 15px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+      border: none; cursor: pointer; font-family: var(--font);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+    .btn-whatsapp {
+      background: #25D366; color: var(--white);
+      padding: 15px 28px; border-radius: 10px;
+      font-weight: 700; font-size: 15px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none; cursor: pointer; font-family: var(--font);
+    }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+    .hero-trust { display: flex; gap: 26px; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.65); font-size: 13px; }
+    .trust-item .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+    .hero-visual { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+    .coach-photo-wrap { position: relative; width: 220px; height: 220px; }
+    .coach-photo-ring { position: absolute; inset: -10px; border: 2px solid var(--gold); border-radius: 50%; opacity: 0.5; }
+    .coach-photo {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(201,168,76,0.18), rgba(201,168,76,0.05));
+      border: 3px solid rgba(201,168,76,0.4);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      color: rgba(201,168,76,0.6); font-size: 14px; text-align: center; padding: 20px;
+    }
+    .coach-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .coach-badge {
+      background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 100px; padding: 6px 18px;
+      color: var(--gold); font-size: 12px; font-weight: 700;
+    }
+    .coach-name { color: var(--white); font-size: 18px; font-weight: 800; text-align: center; }
+    .coach-role { color: rgba(255,255,255,0.6); font-size: 13px; text-align: center; }
+
+    /* SECTION SHARED */
+    .section { padding: 80px 5%; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-eyebrow {
+      text-align: center; color: var(--gold); font-size: 12px;
+      font-weight: 600; letter-spacing: 2px; margin-bottom: 12px; text-transform: uppercase;
+    }
+    .section-title {
+      text-align: center; font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800; color: var(--navy);
+      line-height: 1.35; margin-bottom: 16px;
+    }
+    .section-subtitle {
+      text-align: center; color: var(--text-light);
+      font-size: 16px; max-width: 600px; margin: 0 auto 50px; line-height: 1.8;
+    }
+
+    /* ALL PRODUCTS GRID */
+    .products-section { background: var(--gray-50); }
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+    .product-card {
+      background: var(--white); border-radius: 18px; padding: 28px;
+      border: 1px solid var(--gray-100);
+      box-shadow: var(--shadow); text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .product-card.is-hero { border: 2px solid var(--gold); }
+    .product-hero-badge {
+      position: absolute; top: 16px; left: 16px;
+      background: var(--gold); color: var(--navy);
+      font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 100px;
+    }
+    .product-type-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(13,31,60,0.06); color: var(--navy);
+      font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 100px;
+      width: fit-content;
+    }
+    .product-card-name { font-size: 18px; font-weight: 800; color: var(--navy); line-height: 1.5; }
+    .product-card-desc { font-size: 13.5px; color: var(--text-light); line-height: 1.8; flex-grow: 1; }
+    .product-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--gray-100); }
+    .product-card-price { color: var(--navy); font-weight: 800; font-size: 17px; }
+    .product-card-price small { color: var(--text-light); font-weight: 500; font-size: 12px; }
+    .product-card-arrow { color: var(--gold); font-size: 18px; font-weight: 700; }
+
+    /* ABOUT COACH */
+    .stats-section { background: var(--navy); }
+    .stats-header { text-align: center; max-width: 700px; margin: 0 auto 56px; }
+    .stats-header h2 { color: var(--white); font-size: clamp(20px, 2.5vw, 30px); font-weight: 800; margin-bottom: 16px; }
+    .stats-header p { color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.8; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+    .stat-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 16px; padding: 28px 20px; text-align: center;
+      transition: transform 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.35); }
+    .stat-icon-txt { color: var(--gold); font-size: 24px; margin-bottom: 12px; font-weight: 800; }
+    .stat-number { color: var(--gold); font-size: 36px; font-weight: 800; line-height: 1; margin-bottom: 8px; }
+    .stat-label { color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 500; }
+
+    /* TESTIMONIALS */
+    .testimonials-section { background: var(--white); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; }
+    .testimonial-card {
+      background: var(--gray-50); border-radius: 16px;
+      padding: 26px; border: 1px solid var(--gray-100); position: relative;
+    }
+    .testimonial-text { color: var(--gray-700); font-size: 14.5px; line-height: 1.85; margin-bottom: 18px; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-weight: 700; font-size: 14px; flex-shrink: 0;
+    }
+    .author-info .name { color: var(--navy); font-weight: 700; font-size: 13.5px; }
+    .author-info .role { color: var(--text-light); font-size: 12px; }
+    .stars { color: var(--gold); font-size: 13px; margin-bottom: 10px; letter-spacing: 2px; }
+
+    /* FAQ */
+    .faq-section { background: var(--gray-50); }
+    .faq-list { max-width: 800px; margin: 0 auto; }
+    .faq-item { background: var(--white); border: 1px solid var(--gray-100); border-radius: 12px; margin-bottom: 10px; overflow: hidden; transition: box-shadow 0.2s; }
+    .faq-item.open { box-shadow: var(--shadow); border-color: rgba(201,168,76,0.4); }
+    .faq-q { padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 16px; color: var(--navy); font-weight: 600; font-size: 14.5px; }
+    .faq-icon { width: 26px; height: 26px; border-radius: 50%; background: var(--gray-100); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.3s, background 0.2s; font-weight: 700; color: var(--navy); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--gold); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; padding: 0 22px; }
+    .faq-a-inner { padding-bottom: 18px; color: var(--gray-700); font-size: 13.5px; line-height: 1.85; }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    /* FINAL CTA */
+    .final-cta {
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      padding: 90px 5%; text-align: center; position: relative; overflow: hidden;
+    }
+    .final-cta h2 { color: var(--white); font-size: clamp(22px, 3.5vw, 38px); font-weight: 800; line-height: 1.35; margin-bottom: 16px; }
+    .final-cta h2 span { color: var(--gold); }
+    .final-cta p { color: rgba(255,255,255,0.65); font-size: 15px; max-width: 540px; margin: 0 auto 36px; line-height: 1.8; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 44px 5%; text-align: center; border-top: 1px solid rgba(255,255,255,0.07); }
+    footer .footer-logo-img-wrap { background: var(--white); border-radius: 12px; padding: 12px 22px; display: inline-flex; align-items: center; margin-bottom: 14px; }
+    footer .footer-logo-img { height: 64px; width: auto; display: block; }
+    footer .footer-slogan { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 22px; }
+    footer .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+    footer .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 13px; }
+    footer .footer-links a:hover { color: var(--gold); }
+    footer .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .coach-photo-wrap { width: 150px; height: 150px; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .section { padding: 56px 5%; }
+      .hero { padding: 90px 5% 40px; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-whatsapp { text-align: center; justify-content: center; }
+    }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-img-wrap"><img src="logo.png" class="nav-logo-img" alt="مبادر كوتشينج" onerror="this.parentElement.outerHTML='&lt;div class=&quot;nav-logo-icon&quot;&gt;م&lt;/div&gt;'" /></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">منتجاتنا</a></li>
+    <li><a href="#about">عن الكوتش</a></li>
+    <li><a href="#faq">الأسئلة الشائعة</a></li>
+  </ul>
+  <button class="nav-cta" onclick="openWhatsApp('مرحباً، أرغب في الاستفسار عن منتجات مبادر كوتشينج')">تواصل معنا</button>
+</nav>
+
+<section class="hero" id="hero-section">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-inner" id="hero-inner">
+    <!-- filled dynamically from the product marked isHero -->
+  </div>
+</section>
+
+<section class="section products-section" id="products">
+  <div class="section-inner">
+    <div class="section-eyebrow">منتجاتنا</div>
+    <h2 class="section-title">اختر ما يناسبك</h2>
+    <p class="section-subtitle">ورش، كتب، جلسات كوتشينج فردية، وكورسات — كل ما تحتاجه لبناء مشروعك من الصفر</p>
+    <div class="products-grid fade-in" id="products-grid"></div>
+  </div>
+</section>
+
+<section class="section stats-section" id="about">
+  <div class="section-inner">
+    <div class="stats-header fade-in">
+      <div class="section-eyebrow" style="color:var(--gold)">عن الكوتش</div>
+      <h2>الكوتش عمر المرزوقي — خبرة عملية حقيقية</h2>
+      <p>كوتش ومستشار ريادة أعمال عماني، يحمل شهادات معتمدة من مؤسسات بريطانية وأمريكية، بخبرة عملية تمتد لأكثر من 25 سنة في تدريب وتأهيل رواد الأعمال وبناء المشاريع الناجحة من الصفر.</p>
+    </div>
+    <div class="stats-grid fade-in">
+      <div class="stat-card"><div class="stat-icon-txt">+25</div><div class="stat-number">سنة</div><div class="stat-label">خبرة عملية في ريادة الأعمال والكوتشينج</div></div>
+      <div class="stat-card"><div class="stat-icon-txt">+2500</div><div class="stat-number">ساعة</div><div class="stat-label">ساعة كوتشينج واستشارات</div></div>
+      <div class="stat-card"><div class="stat-icon-txt">+2000</div><div class="stat-number">رائد أعمال</div><div class="stat-label">تم تدريبهم وتأهيلهم</div></div>
+      <div class="stat-card"><div class="stat-icon-txt">شهادات</div><div class="stat-number">معتمدة</div><div class="stat-label">من مؤسسات بريطانية وأمريكية</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section testimonials-section" id="testimonials">
+  <div class="section-inner">
+    <div class="section-eyebrow">آراء عملائنا</div>
+    <h2 class="section-title">ماذا قال من جرّب؟</h2>
+    <p class="section-subtitle">تجارب حقيقية من عملاء مبادر كوتشينج</p>
+    <div class="testimonials-grid fade-in" id="testimonials-grid"></div>
+  </div>
+</section>
+
+<section class="section faq-section" id="faq">
+  <div class="section-inner">
+    <div class="section-eyebrow">الأسئلة الشائعة</div>
+    <h2 class="section-title">أسئلة يطرحها الكثيرون</h2>
+    <p class="section-subtitle">إجابات واضحة لأكثر الأسئلة شيوعًا</p>
+    <div class="faq-list fade-in" id="faq-list"></div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <h2>كل إنسان بداخله <span>مشروع</span> ينتظر قراراً</h2>
+  <p>تصفّح منتجاتنا واختر ما يناسب مرحلتك الحالية، أو تواصل معنا مباشرة لنساعدك تختار الأنسب لك.</p>
+  <button class="btn-whatsapp" onclick="openWhatsApp('مرحباً، أرغب في الاستفسار عن منتجات مبادر كوتشينج')">💬 تواصل عبر الواتساب</button>
+</section>
+
+<footer>
+  <div class="footer-logo-img-wrap"><img src="logo.png" class="footer-logo-img" alt="مبادر كوتشينج" onerror="this.parentElement.outerHTML='&lt;div&gt;مبادر كوتشينج&lt;/div&gt;'" /></div>
+  <div class="footer-slogan">كل إنسان بداخله مشروع ينتظر قراراً</div>
+  <div class="footer-links">
+    <a href="#products">منتجاتنا</a>
+    <a href="#about">عن الكوتش</a>
+    <a href="#faq">الأسئلة الشائعة</a>
+    <a href="admin.html">لوحة التحكم</a>
+  </div>
+  <div class="footer-copy">© 2025 مبادر كوتشينج — جميع الحقوق محفوظة | واتساب: 0096877684008</div>
+</footer>
+
+<script>
+const WA_NUM = '96877684008';
+
+function openWhatsApp(msg) {
+  const encoded = encodeURIComponent(msg || '');
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const url = isMobile
+    ? 'https://wa.me/' + WA_NUM + (encoded ? '?text=' + encoded : '')
+    : 'https://web.whatsapp.com/send?phone=' + WA_NUM + (encoded ? '&text=' + encoded : '');
+  window.open(url, '_blank');
+}
+
+let SITE_DATA = { products: [], testimonials: [], faqs: [], productTypes: {} };
+
+async function loadSiteData(){
+  try{
+    const res = await fetch('/api/data', { cache: 'no-store' });
+    SITE_DATA = await res.json();
+  }catch(err){
+    console.error('Failed to load site data', err);
+  }
+  return SITE_DATA;
+}
+
+function renderHero(){
+  const products = (SITE_DATA.products||[]).filter(p=>p.active);
+  const hero = products.find(p=>p.isHero) || products[0];
+  const heroInner = document.getElementById('hero-inner');
+  if(!hero){
+    heroInner.innerHTML = '<div style="color:white">لا توجد منتجات حالياً</div>';
+    return;
+  }
+  const typeInfo = SITE_DATA.productTypes[hero.type] || {};
+  heroInner.innerHTML = `
+    <div class="hero-content">
+      <div class="hero-eyebrow">${typeInfo.icon||''} ${typeInfo.label||'منتج مميز'}</div>
+      <h1 class="hero-title">${hero.heroTitle || hero.name}</h1>
+      ${hero.tagline ? `<div class="hero-badge-line">${hero.tagline}</div>` : ''}
+      <p class="hero-desc">${hero.desc||''}</p>
+      <div class="hero-actions">
+        <a href="product.html?id=${encodeURIComponent(hero.id)}" class="btn-primary">
+          <span>${hero.cta || 'اعرف المزيد'}</span><span>←</span>
+        </a>
+        <button class="btn-whatsapp" onclick="openWhatsApp('مرحباً، أرغب في الاستفسار عن: ${hero.name}')">
+          <span>💬</span><span>استفسار عبر الواتساب</span>
+        </button>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><div class="dot"></div><span>+2000 رائد أعمال مدرّب</span></div>
+        <div class="trust-item"><div class="dot"></div><span>+25 سنة خبرة</span></div>
+        <div class="trust-item"><div class="dot"></div><span>شهادات بريطانية وأمريكية</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="coach-photo-wrap">
+        <div class="coach-photo-ring"></div>
+        <div class="coach-photo" id="coach-photo">
+          <img src="coach.jpg" alt="الكوتش عمر المرزوقي" onerror="this.parentElement.innerHTML='صورة الكوتش عمر'" />
+        </div>
+      </div>
+      <div class="coach-badge">مدرب ومستشار</div>
+      <div class="coach-name">الكوتش عمر المرزوقي</div>
+      <div class="coach-role">كوتش ومستشار ريادة أعمال — أكثر من 25 سنة خبرة</div>
+    </div>
+  `;
+}
+
+function renderProductsGrid(){
+  const products = (SITE_DATA.products||[]).filter(p=>p.active).sort((a,b)=>(a.order||0)-(b.order||0));
+  const grid = document.getElementById('products-grid');
+  if(!products.length){
+    grid.innerHTML = '<p style="text-align:center;color:var(--text-light)">لا توجد منتجات متاحة حالياً</p>';
+    return;
+  }
+  grid.innerHTML = products.map(p=>{
+    const typeInfo = SITE_DATA.productTypes[p.type] || {};
+    return `
+    <a href="product.html?id=${encodeURIComponent(p.id)}" class="product-card ${p.isHero?'is-hero':''}">
+      ${p.isHero ? '<div class="product-hero-badge">مميز الآن</div>' : ''}
+      <div class="product-type-badge">${typeInfo.icon||'📦'} ${typeInfo.label||'منتج'}</div>
+      <div class="product-card-name">${p.name}</div>
+      <div class="product-card-desc">${p.desc||''}</div>
+      <div class="product-card-footer">
+        <div class="product-card-price">${p.price} <small>${p.currency||''}</small></div>
+        <div class="product-card-arrow">←</div>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+function renderTestimonials(){
+  const ts=SITE_DATA.testimonials||[];
+  document.getElementById('testimonials-grid').innerHTML=ts.map(t=>`
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-text">"${t.text}"</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">${t.init}</div>
+        <div class="author-info"><div class="name">${t.name}</div><div class="role">${t.role}</div></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderFAQ(){
+  const faqs=SITE_DATA.faqs||[];
+  document.getElementById('faq-list').innerHTML=faqs.map(f=>`
+    <div class="faq-item" id="faq-${f.id}">
+      <div class="faq-q" onclick="toggleFAQ('${f.id}')">
+        <span>${f.q}</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><div class="faq-a-inner">${f.a}</div></div>
+    </div>
+  `).join('');
+}
+
+function toggleFAQ(id){
+  const el=document.getElementById('faq-'+id);
+  const wasOpen=el.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(e=>e.classList.remove('open'));
+  if(!wasOpen) el.classList.add('open');
+}
+
+function initAnimations(){
+  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+}
+
+document.addEventListener('DOMContentLoaded', async ()=>{
+  await loadSiteData();
+  renderHero();
+  renderProductsGrid();
+  renderTestimonials();
+  renderFAQ();
+  setTimeout(initAnimations,100);
+});
+</script>
+</body>
+</html>
